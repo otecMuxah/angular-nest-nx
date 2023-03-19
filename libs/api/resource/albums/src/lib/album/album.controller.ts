@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  NotFoundException,
   Param,
   Patch,
   Post,
@@ -64,8 +65,13 @@ export class AlbumController {
     type: Album,
   })
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.albumService.findOne({ id: Number(id) });
+  async findOne(@Param('id') id: string) {
+    const album = await this.albumService.findOne({ id: Number(id) });
+
+    if (!album) {
+      throw new NotFoundException(`Album with ${id} does not exist.`);
+    }
+    return album;
   }
 
   @Patch(':id')

@@ -1,17 +1,33 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
 import { UserService } from './user.service';
-import { Users } from './users.entity';
+import { User } from './users.entity';
+import { ApiOkResponse } from '@nestjs/swagger';
 
 @Controller('users')
 export class UsersController {
   constructor(private userService: UserService) {}
+  @ApiOkResponse({
+    description: 'List of user records',
+    type: User,
+    isArray: true,
+  })
   @Get()
-  getAllUsers(@Param() params): Promise<Users[]> {
+  getAllUsers(@Param() params): Promise<User[]> {
     return this.userService.users({});
   }
 
+  @ApiOkResponse({
+    description: 'Single user record',
+    type: User,
+  })
   @Get(':id')
-  getUser(@Param('id') id: string): Promise<Users[]> {
-    return this.userService.user({ id: Number(id) });
+  async getUser(@Param('id') id: string): Promise<User> {
+    const user = await this.userService.user({ id: Number(id) });
+
+    if (!user) {
+      throw new NotFoundException(`User with ${id} does not exist.`);
+    }
+
+    return user;
   }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from '@test-repo-na/api/core/services/shared-services';
-import { Users } from './users.entity';
+import { User } from './users.entity';
 
 @Injectable()
 export class UserService {
@@ -9,9 +9,12 @@ export class UserService {
 
   async user(
     userWhereUniqueInput: Prisma.usersWhereUniqueInput
-  ): Promise<Users[] | null> {
-    return this.prisma.users.findMany({
+  ): Promise<User | null> {
+    return this.prisma.users.findUnique({
       where: userWhereUniqueInput,
+      include: {
+        albums: true,
+      },
     });
   }
 
@@ -21,7 +24,7 @@ export class UserService {
     cursor?: Prisma.usersWhereUniqueInput;
     where?: Prisma.usersWhereInput;
     orderBy?: Prisma.usersOrderByWithRelationInput;
-  }): Promise<Users[]> {
+  }): Promise<User[]> {
     const { skip, take, cursor, where, orderBy } = params;
     return this.prisma.users.findMany({
       skip,

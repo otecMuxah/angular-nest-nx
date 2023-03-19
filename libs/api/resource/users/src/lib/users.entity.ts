@@ -1,6 +1,7 @@
 import { Prisma, users } from '@prisma/client';
-import { Album } from '../../../albums/src/lib/album/entities/album.entity';
+
 import { ApiProperty } from '@nestjs/swagger';
+import { Album } from '@test-repo-na/api/resource/albums';
 
 export class User implements users {
   @ApiProperty() id: number;

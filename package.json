@@ -7,6 +7,7 @@
     "api-prod": "nx run test-api:build",
     "ui-dev": "npm run config -- --environment=dev && nx serve test-ui",
     "ui-prod": "npm run config -- --environment=prod && nx run test-ui:build",
+    "lint-all": "nx run-many --all --target=lint",
     "config": "ts-node setenv.ts"
   },
   "private": true,

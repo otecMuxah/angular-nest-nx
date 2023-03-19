@@ -1,2 +1,4 @@
 node_modules
 dist
+apps/test-ui/src/environment
+apps/test-ui/src/index.html

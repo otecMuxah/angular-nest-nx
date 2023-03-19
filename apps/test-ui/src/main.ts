@@ -6,7 +6,7 @@ import {
 import { AppComponent } from './app/app.component';
 import { appRoutes } from './app/app.routes';
 import { provideHttpClient } from '@angular/common/http';
-import { ENVIRONMENT } from '../../../libs/ui/shared/env/src/lib/environment.token';
+import { ENVIRONMENT } from '@test-repo-na/ui/shared/env';
 import { environment } from './environment/environment';
 
 bootstrapApplication(AppComponent, {

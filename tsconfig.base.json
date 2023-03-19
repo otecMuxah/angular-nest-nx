@@ -21,6 +21,9 @@
       "@test-repo-na/api/resource/albums": [
         "libs/api/resource/albums/src/index.ts"
       ],
+      "@test-repo-na/api/resource/photo": [
+        "libs/api/resource/photo/src/index.ts"
+      ],
       "@test-repo-na/api/resource/users": [
         "libs/api/resource/users/src/index.ts"
       ]

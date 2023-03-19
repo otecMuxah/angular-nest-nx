@@ -27,6 +27,10 @@
       "@test-repo-na/api/resource/users": [
         "libs/api/resource/users/src/index.ts"
       ],
+      "@test-repo-na/models": ["libs/models/src/index.ts"],
+      "@test-repo-na/ui/features/users": [
+        "libs/ui/features/users/src/index.ts"
+      ],
       "@test-repo-na/ui/shared/env": ["libs/ui/shared/env/src/index.ts"],
       "@test-repo-na/ui/shared/services": [
         "libs/ui/shared/services/src/index.ts"

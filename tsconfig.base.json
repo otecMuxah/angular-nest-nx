@@ -18,6 +18,9 @@
       "@test-repo-na/api/core/services/shared-services": [
         "libs/api/core/services/shared-services/src/index.ts"
       ],
+      "@test-repo-na/api/resource/albums": [
+        "libs/api/resource/albums/src/index.ts"
+      ],
       "@test-repo-na/api/resource/users": [
         "libs/api/resource/users/src/index.ts"
       ]

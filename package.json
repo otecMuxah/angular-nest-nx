@@ -3,13 +3,15 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "api": "nx serve:test-api:"
+    "api": "nx serve test-api"
   },
   "private": true,
   "dependencies": {
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
+    "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^9.0.0",
+    "@nestjs/swagger": "^6.2.1",
     "@nestjs/typeorm": "^9.0.1",
     "@prisma/client": "^4.11.0",
     "axios": "^1.0.0",

@@ -4,6 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ApiResourceUsersModule } from '@test-repo-na/api/resource/users';
+import { ApiResourceAlbumsModule } from '@test-repo-na/api/resource/albums';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { ApiResourceUsersModule } from '@test-repo-na/api/resource/users';
       synchronize: true,
     }),
     ApiResourceUsersModule,
+    ApiResourceAlbumsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

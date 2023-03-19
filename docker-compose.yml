@@ -1,0 +1,74 @@
+version: '3.8'
+
+services:
+  dev:
+    container_name: nestjs_api_dev
+    image: nestjs-api-dev:1.0.0
+    build:
+      context: .
+      target: development
+      dockerfile: apps/test-api/Dockerfile
+    command: npm run start:debug
+    ports:
+      - 3000:3000
+      - 9229:9229
+    networks:
+      - nesjs-network
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: unless-stopped
+
+  # prod:
+  #   container_name: nestjs_api_prod
+  #   image: nestjs-api-prod:1.0.0
+  #   build:
+  #     context: .
+  #     target: production
+  #     dockerfile: ./Dockerfile
+  #   command: pnpm start:prod
+  #   ports:
+  #     - 3000:3000
+  #     - 9229:9229
+  #   networks:
+  #     - nesjs-network
+  #   volumes:
+  #     - .:/usr/src/app
+  #     - /usr/src/app/node_modules
+  #   restart: unless-stopped
+
+  nestjs_db:
+    container_name: nestjs_db
+    image: mysql:8.0.31
+    command: --authentication_policy=mysql_native_password
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: testappDB
+    ports:
+      - 3306:3306
+    volumes:
+      - ./coding_challenge.sql:/docker-entrypoint-initdb.d/dump.sql
+    networks:
+      - nesjs-network
+
+  # postgres:
+  #   image: postgres:13.1
+  #   restart: always
+  #   environment:
+  #     POSTGRES_PASSWORD: example
+  #   ports:
+  #     - 5432:5432
+  #   networks:
+  #     - nesjs-network
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - nesjs-network
+
+networks:
+  nesjs-network:

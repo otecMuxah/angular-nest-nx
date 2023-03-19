@@ -10,4 +10,7 @@ export class UsersService {
   getUsers(): Observable<UserModel[]> {
     return this.api.get<UserModel[]>('users');
   }
+  getUser(id: string): Observable<UserModel> {
+    return this.api.get<UserModel>('users/' + id);
+  }
 }

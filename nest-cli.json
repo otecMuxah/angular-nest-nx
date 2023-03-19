@@ -1,0 +1,25 @@
+{
+  "projects": {
+    "users": {
+      "type": "library",
+      "root": "libs/api/resource/users",
+      "entryFile": "index",
+      "sourceRoot": "libs/api/resource/users/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/api/resource/users/tsconfig.lib.json"
+      }
+    },
+    "shared-services": {
+      "type": "library",
+      "root": "libs/api/core/services/shared-services",
+      "entryFile": "index",
+      "sourceRoot": "libs/api/core/services/shared-services/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/api/core/services/shared-services/tsconfig.lib.json"
+      }
+    }
+  },
+  "compilerOptions": {
+    "webpack": true
+  }
+}

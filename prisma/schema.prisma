@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model albums {
+  userId Int
+  id     Int      @id @default(autoincrement())
+  title  String   @db.Text
+  users  users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "albums_users_id_fk")
+  photos photos[]
+
+  @@index([userId], map: "albums_users_id_fk")
+}
+
+model photos {
+  albumId      Int?
+  id           Int     @id @default(autoincrement())
+  title        String? @db.Text
+  url          String  @db.Text
+  thumbnailUrl String? @db.Text
+  albums       albums? @relation(fields: [albumId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "photos_albums_id_fk")
+
+  @@index([albumId], map: "photos_albums_id_fk")
+}
+
+model users {
+  id       Int      @id @default(autoincrement())
+  name     String   @db.Text
+  username String   @db.Text
+  email    String   @db.Text
+  address  Json?
+  phone    String?  @db.Text
+  website  String?  @db.Text
+  company  Json?
+  albums   albums[]
+}

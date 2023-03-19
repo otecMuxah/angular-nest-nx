@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  dev:
+  api-dev:
     container_name: nestjs_api_dev
     image: nestjs
     build:
@@ -19,23 +19,40 @@ services:
       - /usr/src/app/node_modules
     restart: unless-stopped
 
-  prod:
-   container_name: nestjs_api_prod
-   image: nestjs
-   build:
-     context: .
-     target: production
-     dockerfile: ./Dockerfile
-   command: npm run api-prod
-   ports:
-     - 3000:3000
-     - 9230:9230
-   networks:
-     - nesjs-network
-   volumes:
-     - .:/usr/src/app
-     - /usr/src/app/node_modules
-   restart: unless-stopped
+#  api-prod:
+#    container_name: nestjs_api_prod
+#    image: nestjs
+#    build:
+#      context: .
+#      target: production
+#      dockerfile: ./Dockerfile
+#    command: npm run api-prod
+#    ports:
+#      - 3000:3000
+#      - 9230:9230
+#    networks:
+#      - nesjs-network
+#    volumes:
+#      - .:/usr/src/app
+#      - /usr/src/app/node_modules
+#    restart: unless-stopped
+
+  ui-dev:
+    container_name: angular_ui_dev
+    image: angular
+    build:
+      context: .
+      target: development
+      dockerfile: ./Dockerfile
+    command: npm run ui-dev
+    ports:
+      - 4200:4200
+    networks:
+      - nesjs-network
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: unless-stopped
 
   nestjs_db:
     container_name: nestjs_db

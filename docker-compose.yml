@@ -3,12 +3,12 @@ version: '3.8'
 services:
   dev:
     container_name: nestjs_api_dev
-    image: nestjs-api-dev:1.0.0
+    image: nestjs
     build:
       context: .
       target: development
-      dockerfile: Dockerfile
-    command: npm run api
+      dockerfile: ./Dockerfile
+    command: npm run api-dev
     ports:
       - 3333:3333
       - 9229:9229
@@ -19,23 +19,23 @@ services:
       - /usr/src/app/node_modules
     restart: unless-stopped
 
-  # prod:
-  #   container_name: nestjs_api_prod
-  #   image: nestjs-api-prod:1.0.0
-  #   build:
-  #     context: .
-  #     target: production
-  #     dockerfile: ./Dockerfile
-  #   command: pnpm start:prod
-  #   ports:
-  #     - 3000:3000
-  #     - 9229:9229
-  #   networks:
-  #     - nesjs-network
-  #   volumes:
-  #     - .:/usr/src/app
-  #     - /usr/src/app/node_modules
-  #   restart: unless-stopped
+  prod:
+   container_name: nestjs_api_prod
+   image: nestjs
+   build:
+     context: .
+     target: production
+     dockerfile: ./Dockerfile
+   command: npm run api-prod
+   ports:
+     - 3000:3000
+     - 9230:9230
+   networks:
+     - nesjs-network
+   volumes:
+     - .:/usr/src/app
+     - /usr/src/app/node_modules
+   restart: unless-stopped
 
   nestjs_db:
     container_name: nestjs_db
@@ -51,16 +51,6 @@ services:
       - ./coding_challenge.sql:/docker-entrypoint-initdb.d/dump.sql
     networks:
       - nesjs-network
-
-  # postgres:
-  #   image: postgres:13.1
-  #   restart: always
-  #   environment:
-  #     POSTGRES_PASSWORD: example
-  #   ports:
-  #     - 5432:5432
-  #   networks:
-  #     - nesjs-network
 
   adminer:
     image: adminer

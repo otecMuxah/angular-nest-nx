@@ -39,16 +39,13 @@ COPY --chown=node:node --from=development /usr/src/app/node_modules ./node_modul
 
 COPY --chown=node:node ../.. .
 
-RUN npm install -g pnpm
-
 # Run the build command which creates the production bundle
-RUN pnpm build
 
 # Set NODE_ENV environment variable
 ENV NODE_ENV production
 
 # Running `npm ci` removes the existing node_modules directory and passing in --only=production ensures that only the production dependencies are installed. This ensures that the node_modules directory is as optimized as possible
-RUN pnpm install --prod
+RUN npm ci --only=production && npm cache clean --force
 USER node
 
 ###################

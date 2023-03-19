@@ -6,17 +6,19 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ApiResourceUsersModule } from '@test-repo-na/api/resource/users';
 import { ApiResourceAlbumsModule } from '@test-repo-na/api/resource/albums';
 import { ApiResourcePhotoModule } from '@test-repo-na/api/resource/photo';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'nestjs_db',
-      username: 'root',
-      password: 'root',
+      username: process.env.DATABASE_USER,
+      password: process.env.DATABASE_PASSWORD,
       database: 'coding_challenge',
       synchronize: true,
     }),
+    ConfigModule.forRoot(),
     ApiResourceUsersModule,
     ApiResourceAlbumsModule,
     ApiResourcePhotoModule,

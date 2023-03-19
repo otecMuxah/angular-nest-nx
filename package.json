@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "api-dev": "nx serve test-api",
+    "api-dev": "npx prisma generate && nx serve test-api",
     "api-prod": "nx run test-api:build",
-    "ui-dev": "npm run config -- --environment=dev && nx serve test-ui",
+    "ui-dev": "npm run config -- --environment=dev && nx serve test-ui --host 0.0.0.0",
     "ui-prod": "npm run config -- --environment=prod && nx run test-ui:build",
     "lint-all": "nx run-many --all --target=lint",
     "config": "ts-node setenv.ts"

@@ -1,0 +1,31 @@
+<ng-container *ngIf="user$ | async as model">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title> User Information </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div>Name: {{ model.name }}</div>
+      <div>Username: {{ model.username }}</div>
+      <div>Email: {{ model.email }}</div>
+
+      <div>Phone: {{ model.phone }}</div>
+      <div>Website: {{ model.website }}</div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-label>Albums:</mat-label>
+  <div class="flex">
+    <ng-container *ngFor="let album of model.albums">
+      <button
+        mat-flat-button
+        color="primary"
+        [routerLink]="['album', album.id]"
+        [routerLinkActive]="'active'"
+      >
+        {{ album.title }}
+      </button>
+    </ng-container>
+  </div>
+</ng-container>
+
+<router-outlet></router-outlet>

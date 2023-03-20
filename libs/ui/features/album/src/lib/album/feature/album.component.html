@@ -1,0 +1,12 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <mat-label>Photos:</mat-label>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <ng-container *ngFor="let photo of photos$ | async">
+      <test-repo-na-photo [photo]="photo"></test-repo-na-photo>
+    </ng-container>
+  </mat-card-content>
+</mat-card>

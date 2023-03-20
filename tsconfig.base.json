@@ -28,6 +28,9 @@
         "libs/api/resource/users/src/index.ts"
       ],
       "@test-repo-na/models": ["libs/models/src/index.ts"],
+      "@test-repo-na/ui/features/album": [
+        "libs/ui/features/album/src/index.ts"
+      ],
       "@test-repo-na/ui/features/users": [
         "libs/ui/features/users/src/index.ts"
       ],

@@ -1,0 +1,12 @@
+:host {
+  display: flex;
+  flex-direction: column;
+}
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.active {
+  background: red !important;
+}

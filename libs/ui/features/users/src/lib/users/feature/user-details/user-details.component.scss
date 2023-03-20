@@ -1,6 +1,12 @@
 :host {
+  display: block;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.wrapper {
   display: flex;
-  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 16px;
 }
 .flex {
   display: flex;

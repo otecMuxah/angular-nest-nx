@@ -15,9 +15,22 @@ export class PhotosService {
     });
   }
 
-  async photosByAlbumId(albumId: number): Promise<Photo[] | null> {
+  async photosByAlbumId(
+    albumId: number,
+    params: {
+      skip?: number;
+      take?: number;
+      cursor?: Prisma.photosWhereUniqueInput;
+      where?: Prisma.photosWhereInput;
+      orderBy?: Prisma.photosOrderByWithRelationInput;
+    }
+  ): Promise<Photo[] | null> {
+    const { skip, take } = params;
+
     return this.prisma.photos.findMany({
       where: { albumId: albumId },
+      skip,
+      take,
     });
   }
 

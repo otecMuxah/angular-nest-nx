@@ -1,12 +1,9 @@
 import { Route } from '@angular/router';
-import { AlbumComponent } from '@test-repo-na/ui/features/album';
-import { AlbumResolver } from './data-access/album.resolver';
+import { AlbumComponent } from './feature/album.component';
 
 export const uiFeaturesAlbumRoutes: Route[] = [
   {
     path: ':id',
     component: AlbumComponent,
-    resolve: { album: AlbumResolver },
-    runGuardsAndResolvers: 'always',
   },
 ];

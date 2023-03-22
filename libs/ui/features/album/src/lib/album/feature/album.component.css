@@ -3,8 +3,13 @@ mat-card {
   height: 500px;
 }
 mat-card-content {
-  overflow: scroll;
+  height: 100%;
+  overflow: hidden;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+cdk-virtual-scroll-viewport {
+  height: 420px;
+  width: 100%;
 }

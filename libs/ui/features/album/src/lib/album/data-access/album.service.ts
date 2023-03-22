@@ -6,7 +6,13 @@ import { Photo } from '@test-repo-na/models';
 @Injectable({ providedIn: 'root' })
 export class AlbumService {
   api = inject(ApiBaseService);
-  getAlbumPhotos(albumId: string): Observable<Photo[]> {
-    return this.api.get<Photo[]>('photos/album/' + albumId);
+  getAlbumPhotos(
+    albumId: string,
+    page?: string,
+    pageSize?: string
+  ): Observable<Photo[]> {
+    return this.api.get<Photo[]>(
+      'photos/album/' + albumId + '?page=' + page + '&pageSize=' + pageSize
+    );
   }
 }

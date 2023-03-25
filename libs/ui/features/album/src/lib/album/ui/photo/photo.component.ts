@@ -1,5 +1,5 @@
 import { Component, inject, Input } from '@angular/core';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Photo } from '@test-repo-na/models';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { PhotoModalComponent } from '../photo-modal/photo-modal.component';
@@ -7,7 +7,7 @@ import { PhotoModalComponent } from '../photo-modal/photo-modal.component';
 @Component({
   selector: 'test-repo-na-photo',
   standalone: true,
-  imports: [CommonModule, NgOptimizedImage, MatDialogModule],
+  imports: [CommonModule, MatDialogModule],
   templateUrl: './photo.component.html',
   styleUrls: ['./photo.component.scss'],
 })

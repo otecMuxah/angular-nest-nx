@@ -1,15 +1,9 @@
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
-import {
-  BehaviorSubject,
-  combineLatest,
-  Observable,
-  Subscription,
-  take,
-} from 'rxjs';
-import { AlbumService } from './data-access/album.service';
+import { BehaviorSubject, Observable, Subscription, take } from 'rxjs';
+import { AlbumService } from './album.service';
 import { Photo } from '@test-repo-na/models';
 
-export class MyDataSource extends DataSource<Photo | undefined> {
+export class PhotosDataSource extends DataSource<Photo | undefined> {
   private _pageSize = 10;
   private _cachedData: Photo[] = [];
   private _fetchedPages = new Set<number>();

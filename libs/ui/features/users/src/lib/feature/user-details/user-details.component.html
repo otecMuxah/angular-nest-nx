@@ -1,0 +1,29 @@
+<div class="wrapper" *ngIf="user$ | async as model">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title> User Information: </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div>Name: {{ model.name }}</div>
+      <div>Username: {{ model.username }}</div>
+      <div>Email: {{ model.email }}</div>
+
+      <div>Phone: {{ model.phone }}</div>
+      <div>Website: {{ model.website }}</div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-flat-button color="primary" [routerLink]="'/users'">
+        Back
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+  <test-repo-na-album-list
+    *ngIf="model?.albums"
+    [albums]="model.albums || []"
+  ></test-repo-na-album-list>
+
+  <test-repo-na-create-album></test-repo-na-create-album>
+
+  <router-outlet></router-outlet>
+</div>

@@ -1,13 +1,13 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AlbumService } from '../data-access/album.service';
-import { map, Observable, take } from 'rxjs';
+import { AlbumService } from '../../data-access/album.service';
+import { map, Observable } from 'rxjs';
 import { Photo } from '@test-repo-na/models';
-import { ActivatedRoute, Params } from '@angular/router';
-import { PhotoComponent } from '../ui/photo/photo.component';
+import { ActivatedRoute } from '@angular/router';
+import { PhotoComponent } from '../../ui/photo/photo.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MyDataSource } from '../album.datasource';
+import { PhotosDataSource } from '../../data-access/album.datasource';
 import {
   CdkFixedSizeVirtualScroll,
   CdkVirtualForOf,
@@ -35,7 +35,7 @@ export class AlbumComponent implements OnInit {
   albumService = inject(AlbumService);
   route = inject(ActivatedRoute);
   photos$!: Observable<Photo[]>;
-  ds!: MyDataSource | null;
+  ds!: PhotosDataSource | null;
 
   ngOnInit(): void {
     this.photos$ = this.route.data.pipe(map((data) => data['album']));
@@ -44,7 +44,7 @@ export class AlbumComponent implements OnInit {
         this.ds.disconnect();
         this.ds = null;
       }
-      this.ds = new MyDataSource(param['id'], this.albumService);
+      this.ds = new PhotosDataSource(param['id'], this.albumService);
     });
   }
 }

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersService } from '../../data-access/users.service';
 import { UserBoxComponent } from '../../ui/user-box/user-box.component';
@@ -12,6 +12,6 @@ import { UserBoxComponent } from '../../ui/user-box/user-box.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserListPageComponent {
+  private readonly usersService = inject(UsersService);
   users$ = this.usersService.getUsers();
-  constructor(protected usersService: UsersService) {}
 }

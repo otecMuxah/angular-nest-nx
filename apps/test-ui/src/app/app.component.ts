@@ -1,15 +1,11 @@
 import { RouterModule } from '@angular/router';
-import { Component } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   standalone: true,
-  imports: [RouterModule, HttpClientModule],
+  imports: [RouterModule],
   selector: 'test-repo-na-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  providers: [],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {
-  title = 'test-ui';
-}
+export class AppComponent {}

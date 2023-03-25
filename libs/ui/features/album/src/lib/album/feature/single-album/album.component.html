@@ -1,11 +1,15 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>
-      <mat-label>Photos 111:</mat-label>
+      <mat-label>Photos:</mat-label>
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <cdk-virtual-scroll-viewport itemSize="155" class="example-viewport">
+    <cdk-virtual-scroll-viewport
+      appendOnly
+      itemSize="155"
+      class="example-viewport"
+    >
       <div *cdkVirtualFor="let photo of ds">
         <test-repo-na-photo [photo]="photo"></test-repo-na-photo>
       </div>

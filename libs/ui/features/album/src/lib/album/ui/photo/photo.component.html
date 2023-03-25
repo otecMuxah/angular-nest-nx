@@ -1,5 +1,6 @@
 <img
-  [src]="photo?.thumbnailUrl || ''"
+  *ngIf="photo"
+  [src]="photo.thumbnailUrl"
   alt="thumbnail"
   width="150"
   height="150"

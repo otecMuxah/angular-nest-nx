@@ -15,7 +15,7 @@ import { ConfigModule } from '@nestjs/config';
       host: 'nestjs_db',
       username: process.env.DATABASE_USER,
       password: process.env.DATABASE_PASSWORD,
-      database: 'coding_challenge',
+      database: process.env.DATABASE_NAME,
       synchronize: true,
     }),
     ConfigModule.forRoot(),

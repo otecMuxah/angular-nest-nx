@@ -1,7 +1,7 @@
 import { Route } from '@angular/router';
-import { UserListPageComponent } from './users/feature/user-list-page/user-list-page.component';
-import { UserDetailsComponent } from './users/feature/user-details/user-details.component';
-import { UserResolver } from './users/data-access/user.resolver';
+import { UserListPageComponent } from './feature/user-list-page/user-list-page.component';
+import { UserDetailsComponent } from './feature/user-details/user-details.component';
+import { UserResolver } from './data-access/user.resolver';
 
 export const uiFeaturesUsersRoutes: Route[] = [
   { path: '', component: UserListPageComponent },

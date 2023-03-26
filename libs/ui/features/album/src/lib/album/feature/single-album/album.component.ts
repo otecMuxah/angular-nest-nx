@@ -31,20 +31,17 @@ import {
   styleUrls: ['./album.component.css'],
 })
 export class AlbumComponent implements OnInit {
-  @Input() albumId = '';
   albumService = inject(AlbumService);
   route = inject(ActivatedRoute);
-  photos$!: Observable<Photo[]>;
   ds!: PhotosDataSource | null;
 
   ngOnInit(): void {
-    this.photos$ = this.route.data.pipe(map((data) => data['album']));
     this.route.params.pipe().subscribe((param) => {
       if (this.ds) {
         this.ds.disconnect();
         this.ds = null;
       }
-      this.ds = new PhotosDataSource(param['id'], this.albumService);
+      this.ds = new PhotosDataSource(param['albumId'], this.albumService);
     });
   }
 }

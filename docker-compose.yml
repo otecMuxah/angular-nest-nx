@@ -19,24 +19,6 @@ services:
       - /usr/src/app/node_modules
     restart: unless-stopped
 
-#  api-prod:
-#    container_name: nestjs_api_prod
-#    image: nestjs
-#    build:
-#      context: .
-#      target: production
-#      dockerfile: ./Dockerfile
-#    command: npm run api-prod
-#    ports:
-#      - 3000:3000
-#      - 9230:9230
-#    networks:
-#      - nesjs-network
-#    volumes:
-#      - .:/usr/src/app
-#      - /usr/src/app/node_modules
-#    restart: unless-stopped
-
   ui-dev:
     container_name: angular_ui_dev
     image: angular

@@ -13,12 +13,6 @@
   />
 </div>
 
-<form (ngSubmit)="onSubmit()">
-  <button type="submit">Submit</button>
-</form>
-
-{{ value | json }}
-
 <div>
   <img *ngFor="let preview of previews" [src]="preview" class="preview" />
 </div>

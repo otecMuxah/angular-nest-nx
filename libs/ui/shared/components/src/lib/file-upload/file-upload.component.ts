@@ -33,7 +33,9 @@ export class FileUploadComponent implements ControlValueAccessor {
   onChange!: (files: File[]) => void;
 
   onFileSelect(ev: any): void {
-    this.selectedFiles = ev?.target?.files;
+    this.selectedFiles = ev?.target?.files?.length
+      ? ev?.target?.files
+      : ev.dataTransfer.files;
     this.onChange(this.selectedFiles);
 
     this.previews = [];
@@ -49,20 +51,9 @@ export class FileUploadComponent implements ControlValueAccessor {
         reader.readAsDataURL(this.selectedFiles[i]);
       }
     }
-    // debugger;
-    // const file = ev.target.files.item(0);
-    // if (!file) return;
-    // this.onChange(file);
-    // const reader = new FileReader();
-    // reader.readAsDataURL(file);
-    // reader.onload = () => {
-    //   debugger;
-    //   this.imageUrl = reader.result as string;
-    // };
   }
 
   writeValue(files: File[]): void {
-    debugger;
     if (files) {
       for (let i = 0; i < files.length; i++) {
         const reader = new FileReader();
@@ -73,12 +64,6 @@ export class FileUploadComponent implements ControlValueAccessor {
 
         reader.readAsDataURL(this.selectedFiles[i]);
       }
-      //
-      // const reader = new FileReader();
-      // reader.readAsDataURL(file);
-      // reader.onload = () => {
-      //   this.imageUrl = reader.result as string;
-      // };
     }
   }
 
@@ -111,15 +96,5 @@ export class FileUploadComponent implements ControlValueAccessor {
     event.stopPropagation();
     this.isDragging = false;
     this.onFileSelect(event);
-  }
-
-  onSubmit() {
-    // const formData = new FormData();
-    // formData.append('file', this.fileForm.get('file')?.value);
-    //
-    // this.http.post('your-server-url', formData).subscribe(
-    //   (response) => console.log(response),
-    //   (error) => console.log(error)
-    // );
   }
 }

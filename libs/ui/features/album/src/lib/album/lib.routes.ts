@@ -3,7 +3,7 @@ import { AlbumComponent } from './feature/single-album/album.component';
 
 export const uiFeaturesAlbumRoutes: Route[] = [
   {
-    path: ':id',
+    path: ':albumId',
     component: AlbumComponent,
   },
 ];

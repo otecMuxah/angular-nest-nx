@@ -6,6 +6,7 @@ import { Photo } from '@test-repo-na/models';
 @Injectable({ providedIn: 'root' })
 export class AlbumService {
   api = inject(ApiBaseService);
+
   getAlbumPhotos(
     albumId: string,
     page?: string,
@@ -23,7 +24,7 @@ export class AlbumService {
     }
     formData.append('userId', String(userId));
     formData.append('title', title);
-    debugger;
+
     return this.api.post('album', formData);
   }
 }

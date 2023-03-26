@@ -7,10 +7,9 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatIconModule } from '@angular/material/icon';
 import { AlbumService } from '../../data-access/album.service';
-import { Photo } from '@test-repo-na/models';
 import { FileUploadComponent } from '../../../../../../../shared/components/src/lib/file-upload/file-upload.component';
-import { ActivatedRoute } from '@angular/router';
-import { filter, map, switchMap } from 'rxjs';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'test-repo-na-create-album',
@@ -24,50 +23,43 @@ import { filter, map, switchMap } from 'rxjs';
     MatAutocompleteModule,
     MatIconModule,
     FileUploadComponent,
+    MatSnackBarModule,
   ],
   templateUrl: './create-album.component.html',
   styleUrls: ['./create-album.component.scss'],
 })
 export class CreateAlbumComponent {
-  page = 0;
-  route = inject(ActivatedRoute);
+  albumService = inject(AlbumService);
+  snackbar = inject(MatSnackBar);
 
   form = new FormGroup({
     name: new FormControl(''),
     photos: new FormControl<File[]>([]),
   });
-  constructor(private albumService: AlbumService) {
-    this.form.valueChanges.subscribe((data) => {
-      console.log(data, this.route);
-    });
-    this.route.params.subscribe((data) => {
-      console.log(data);
-    });
-  }
 
   createAlbum() {
-    this.route.params
-      .pipe(
-        map((param) => {
-          debugger;
-          const x = param['userId'];
-          return 2;
-        }),
-        filter(Boolean),
-        switchMap((id) =>
-          this.albumService.createAlbum(
-            this.form.value.photos || [],
-            +id,
-            this.form.value.name || ''
-          )
-        )
-      )
-      .subscribe((data) => {
-        console.log(data);
-      });
-  }
+    // have issue accessing userId from activated route
+    const url = window.location.href;
+    const regex = /users\/(\d+)\/album/;
+    const match = url.match(regex);
 
-  remove(fruit: Photo) {
-    console.log(fruit);
+    if (match) {
+      const number = match[1];
+      this.albumService
+        .createAlbum(
+          this.form.value.photos || [],
+          +number,
+          this.form.value.name || ''
+        )
+        .pipe(
+          catchError((err) => {
+            this.snackbar.open(err.message, 'close');
+            return throwError(err);
+          })
+        )
+        .subscribe();
+    } else {
+      console.log('No match found');
+    }
   }
 }

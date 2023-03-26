@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { RouterLink, RouterLinkActive } from '@angular/router';
@@ -21,6 +27,7 @@ import { take } from 'rxjs';
   ],
   templateUrl: './album-list.component.html',
   styleUrls: ['./album-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AlbumListComponent {
   @Input() albums: AlbumModel[] = [];

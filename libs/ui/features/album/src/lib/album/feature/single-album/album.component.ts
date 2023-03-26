@@ -1,8 +1,12 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AlbumService } from '../../data-access/album.service';
-import { map, Observable } from 'rxjs';
-import { PhotoModel } from '@test-repo-na/models';
 import { ActivatedRoute } from '@angular/router';
 import { PhotoComponent } from '../../ui/photo/photo.component';
 import { MatCardModule } from '@angular/material/card';
@@ -29,10 +33,12 @@ import {
   providers: [CdkVirtualScrollViewport],
   templateUrl: './album.component.html',
   styleUrls: ['./album.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AlbumComponent implements OnInit {
   albumService = inject(AlbumService);
   route = inject(ActivatedRoute);
+  cdr = inject(ChangeDetectorRef);
   ds!: PhotosDataSource | null;
 
   ngOnInit(): void {
@@ -42,6 +48,7 @@ export class AlbumComponent implements OnInit {
         this.ds = null;
       }
       this.ds = new PhotosDataSource(param['albumId'], this.albumService);
+      this.cdr.markForCheck();
     });
   }
 }

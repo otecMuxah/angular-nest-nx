@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   ActivatedRoute,
@@ -31,6 +31,7 @@ import { UsersService } from '../../data-access/users.service';
   ],
   templateUrl: './user-details.component.html',
   styleUrls: ['./user-details.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserDetailsComponent {
   route = inject(ActivatedRoute);

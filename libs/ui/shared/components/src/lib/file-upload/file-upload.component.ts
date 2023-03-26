@@ -1,4 +1,10 @@
-import { Component, forwardRef } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  forwardRef,
+  inject,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   ControlValueAccessor,
@@ -20,8 +26,10 @@ import {
       multi: true,
     },
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FileUploadComponent implements ControlValueAccessor {
+  cdr = inject(ChangeDetectorRef);
   selectedFiles!: File[] | FileList | null;
   isDragging = false;
   previews: string[] = [];
@@ -42,6 +50,7 @@ export class FileUploadComponent implements ControlValueAccessor {
 
         reader.onload = (e: any) => {
           this.previews.push(e.target.result);
+          this.cdr.markForCheck();
         };
 
         reader.readAsDataURL(this.selectedFiles[i]);

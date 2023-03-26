@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { UserModel } from '@test-repo-na/models';
@@ -18,6 +18,7 @@ import { RouterLink } from '@angular/router';
   ],
   templateUrl: './user-box.component.html',
   styleUrls: ['./user-box.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserBoxComponent {
   @Input() user: UserModel = {} as UserModel;

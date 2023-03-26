@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
@@ -30,6 +30,7 @@ import { MatDialogRef } from '@angular/material/dialog';
   ],
   templateUrl: './create-album.component.html',
   styleUrls: ['./create-album.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateAlbumComponent {
   albumService = inject(AlbumService);

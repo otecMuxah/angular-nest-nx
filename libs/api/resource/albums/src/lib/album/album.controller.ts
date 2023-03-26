@@ -54,8 +54,9 @@ export class AlbumController {
     @Body() createAlbumDto: CreateAlbumDto,
     @UploadedFiles() files: { files: Array<Express.Multer.File> }
   ) {
+    if (!files?.files?.length) throw new NotFoundException('no files uploaded');
     const album = await this.albumService.create(createAlbumDto);
-    console.log('FILES', files);
+
     const photos = files.files?.map((file) => {
       return {
         url: `${process.env.HOST_URL}uploads/${file.filename}`,

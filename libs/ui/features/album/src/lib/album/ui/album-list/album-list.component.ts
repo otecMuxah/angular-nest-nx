@@ -11,7 +11,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { AlbumModel } from '@test-repo-na/models';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { CreateAlbumComponent } from '../create-album/create-album.component';
+import { CreateAlbumComponent } from '../../feature/create-album/create-album.component';
 import { take } from 'rxjs';
 
 @Component({

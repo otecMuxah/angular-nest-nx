@@ -63,7 +63,10 @@ export class CreateAlbumComponent {
             return throwError(err);
           })
         )
-        .subscribe(() => this.dialog.close());
+        .subscribe(() => {
+          this.dialog.close();
+          this.snackbar.open('New album added', 'close');
+        });
     }
   }
 }

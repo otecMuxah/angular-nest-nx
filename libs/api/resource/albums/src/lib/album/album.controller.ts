@@ -52,15 +52,15 @@ export class AlbumController {
     @Body() createAlbumDto: CreateAlbumDto,
     @UploadedFiles() files: { files: Array<Express.Multer.File> }
   ) {
-    console.log(111111, createAlbumDto, files);
     const album = await this.albumService.create(createAlbumDto);
     const photos = files.files.map((file) => {
       return {
-        url: `http://localhost:3000/uploads/${file.filename}`,
+        url: `${process.env.HOST_URL}uploads/${file.filename}`,
+        thumbnailUrl: `${process.env.HOST_URL}uploads/${file.filename}`,
         albumId: album.id,
       } as CreatePhotoDto;
     });
-    console.log(222222, album, photos);
+
     return this.photoService.create(photos);
   }
 

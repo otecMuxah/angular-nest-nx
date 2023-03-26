@@ -9,4 +9,7 @@ export class CreatePhotoDto {
 
   @ApiProperty()
   url: string;
+
+  @ApiProperty()
+  thumbnailUrl?: string;
 }

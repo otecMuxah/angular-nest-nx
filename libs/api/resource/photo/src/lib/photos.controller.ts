@@ -1,7 +1,6 @@
 import { Controller, Get, Param, Query } from '@nestjs/common';
 import { PhotosService } from './photos.service';
 import { Photo } from './entity/photo.entity';
-import { CreateAlbumDto } from '../../../albums/src/lib/album/dto/create-album.dto';
 
 @Controller('photos')
 export class PhotosController {

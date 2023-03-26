@@ -12,6 +12,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { catchError, throwError } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'test-repo-na-create-album',
@@ -36,6 +37,7 @@ export class CreateAlbumComponent {
   albumService = inject(AlbumService);
   snackbar = inject(MatSnackBar);
   dialog = inject(MatDialogRef);
+  router = inject(Router);
 
   form = new FormGroup({
     title: new FormControl<string>(''),
@@ -44,10 +46,9 @@ export class CreateAlbumComponent {
 
   createAlbum() {
     // have issue accessing userId from activated route
-    const url = window.location.href;
-    const regex = /users\/(\d+)\/album/;
+    const url = this.router.url;
+    const regex = /users\/(\d+)\/*/;
     const match = url.match(regex);
-
     if (match) {
       const number = match[1];
       this.albumService

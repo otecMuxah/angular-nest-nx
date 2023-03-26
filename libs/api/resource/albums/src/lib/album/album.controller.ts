@@ -55,7 +55,8 @@ export class AlbumController {
     @UploadedFiles() files: { files: Array<Express.Multer.File> }
   ) {
     const album = await this.albumService.create(createAlbumDto);
-    const photos = files.files.map((file) => {
+    console.log('FILES', files);
+    const photos = files.files?.map((file) => {
       return {
         url: `${process.env.HOST_URL}uploads/${file.filename}`,
         thumbnailUrl: `${process.env.HOST_URL}uploads/${file.filename}`,

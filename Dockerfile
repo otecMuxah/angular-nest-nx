@@ -8,7 +8,6 @@ FROM node:18-alpine As development
 WORKDIR /usr/src/app
 
 RUN apk add --update python3 make g++ && rm -rf /var/cache/apk/*
-RUN apk add --update libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
 
 # Copy application dependency manifests to the container image.
 # A wildcard is used to ensure copying both package.json AND package-lock.json (when available).

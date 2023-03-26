@@ -3,7 +3,7 @@
     <form [formGroup]="form">
       <mat-form-field appearance="outline">
         <mat-label>Title: </mat-label>
-        <input matInput formControlName="title" />
+        <input matInput formControlName="title" data-cy="album-title-input" />
       </mat-form-field>
       <div>
         <mat-label>Photos:</mat-label>
@@ -14,6 +14,13 @@
     </form>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button (click)="createAlbum()">Submit</button>
+    <button
+      mat-raised-button
+      type="submit"
+      (click)="createAlbum()"
+      data-cy="album-submit-button"
+    >
+      Submit
+    </button>
   </mat-card-actions>
 </mat-card>

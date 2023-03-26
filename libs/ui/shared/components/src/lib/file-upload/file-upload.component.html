@@ -6,7 +6,13 @@
 >
   <p>Drop files here</p>
 </div>
-<input type="file" (change)="onFileSelect($event)" accept="image/*" multiple />
+<input
+  type="file"
+  (change)="onFileSelect($event)"
+  accept="image/*"
+  multiple
+  data-cy="file-upload-input"
+/>
 <div>
   <div>Preview:</div>
   <img *ngFor="let preview of previews" [src]="preview" class="preview" />

@@ -10,6 +10,7 @@
     "lint-all": "nx run-many --all --target=lint",
     "test-all": "npx nx run-many --all --target=test --parallel",
     "serve-all": "npx nx run-many --all --target=serve --parallel --projects=test-api,test-ui",
+    "e2e": "npx nx e2e test-ui-e2e",
     "config": "ts-node setenv.ts"
   },
   "private": true,

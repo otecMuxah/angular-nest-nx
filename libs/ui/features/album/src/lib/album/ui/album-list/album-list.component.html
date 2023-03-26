@@ -17,6 +17,12 @@
     </div>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-flat-button (click)="createAlbum()">Create new album</button>
+    <button
+      mat-flat-button
+      (click)="createAlbum()"
+      data-cy="create-new-album-button"
+    >
+      Create new album
+    </button>
   </mat-card-actions>
 </mat-card>

@@ -15,4 +15,15 @@ export class AlbumService {
       'photos/album/' + albumId + '?page=' + page + '&pageSize=' + pageSize
     );
   }
+
+  createAlbum(files: File[], userId: number, title: string) {
+    const formData = new FormData();
+    for (let i = 0; i < files.length; i++) {
+      formData.append('files', files[i]);
+    }
+    formData.append('userId', String(userId));
+    formData.append('title', title);
+    debugger;
+    return this.api.post('album', formData);
+  }
 }

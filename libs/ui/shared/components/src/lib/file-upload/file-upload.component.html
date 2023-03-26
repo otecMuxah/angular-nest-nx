@@ -1,0 +1,24 @@
+<div
+  class="drop-zone"
+  (dragover)="onDragOver($event)"
+  (dragleave)="onDragLeave($event)"
+  (drop)="onDrop($event)"
+>
+  <p>Drop files here</p>
+  <input
+    type="file"
+    (change)="onFileSelect($event)"
+    accept="image/*"
+    multiple
+  />
+</div>
+
+<form (ngSubmit)="onSubmit()">
+  <button type="submit">Submit</button>
+</form>
+
+{{ value | json }}
+
+<div>
+  <img *ngFor="let preview of previews" [src]="preview" class="preview" />
+</div>

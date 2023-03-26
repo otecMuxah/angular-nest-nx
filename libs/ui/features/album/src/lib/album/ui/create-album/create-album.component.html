@@ -1,0 +1,18 @@
+<mat-card>
+  <mat-card-content>
+    {{ form.value | json }}
+    <form [formGroup]="form">
+      <mat-form-field appearance="outline">
+        <mat-label>Input</mat-label>
+        <input matInput formControlName="name" />
+      </mat-form-field>
+
+      <test-repo-na-file-upload
+        formControlName="photos"
+      ></test-repo-na-file-upload>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button (click)="createAlbum()">Submit</button>
+  </mat-card-actions>
+</mat-card>

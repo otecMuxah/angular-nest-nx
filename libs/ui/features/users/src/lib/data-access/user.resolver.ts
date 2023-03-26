@@ -16,6 +16,6 @@ export class UserResolver implements Resolve<UserModel> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<UserModel> | Promise<UserModel> | UserModel {
-    return this.service.getUser(route.paramMap.get('id') || '');
+    return this.service.getUser(route.paramMap.get('userId') || '');
   }
 }

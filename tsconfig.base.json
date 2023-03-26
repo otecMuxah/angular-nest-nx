@@ -34,6 +34,9 @@
       "@test-repo-na/ui/features/users": [
         "libs/ui/features/users/src/index.ts"
       ],
+      "@test-repo-na/ui/shared/components": [
+        "libs/ui/shared/components/src/index.ts"
+      ],
       "@test-repo-na/ui/shared/env": ["libs/ui/shared/env/src/index.ts"],
       "@test-repo-na/ui/shared/services": [
         "libs/ui/shared/services/src/index.ts"

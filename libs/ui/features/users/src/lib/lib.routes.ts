@@ -6,7 +6,7 @@ import { UserResolver } from './data-access/user.resolver';
 export const uiFeaturesUsersRoutes: Route[] = [
   { path: '', component: UserListPageComponent },
   {
-    path: ':id',
+    path: ':userId',
     component: UserDetailsComponent,
     resolve: { user: UserResolver },
     children: [

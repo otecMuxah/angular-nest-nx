@@ -43,7 +43,6 @@ export class PhotosDataSource extends DataSource<Photo | undefined> {
   }
 
   private _fetchPage(page: number) {
-    debugger;
     if (this._fetchedPages.has(page)) {
       return;
     }

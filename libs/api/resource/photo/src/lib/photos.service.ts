@@ -2,10 +2,18 @@ import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { Photo } from './entity/photo.entity';
 import { PrismaService } from '@test-repo-na/api/core/services/shared-services';
+import { CreateAlbumDto } from '../../../albums/src/lib/album/dto/create-album.dto';
+import { CreatePhotoDto } from './dto/create-photo.dto';
 
 @Injectable()
 export class PhotosService {
   constructor(private prisma: PrismaService) {}
+
+  async create(createPhotoDto: CreatePhotoDto[]) {
+    return this.prisma.photos.createMany({
+      data: createPhotoDto,
+    });
+  }
 
   async photo(
     photosWhereUniqueInput: Prisma.photosWhereUniqueInput

@@ -9,8 +9,14 @@ import { PrismaService } from '@test-repo-na/api/core/services/shared-services';
 export class AlbumService {
   constructor(private prisma: PrismaService) {}
   async create(createAlbumDto: CreateAlbumDto) {
+    const { title, userId } = createAlbumDto;
     return this.prisma.albums.create({
-      data: createAlbumDto,
+      data: {
+        title,
+        users: {
+          connect: { id: Number(userId) },
+        },
+      },
     });
   }
   async findOne(

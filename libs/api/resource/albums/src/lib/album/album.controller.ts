@@ -8,24 +8,60 @@ import {
   Patch,
   Post,
   Query,
+  UploadedFiles,
+  UseInterceptors,
 } from '@nestjs/common';
 import { AlbumService } from './album.service';
 import { CreateAlbumDto } from './dto/create-album.dto';
 import { UpdateAlbumDto } from './dto/update-album.dto';
 import { ApiOkResponse } from '@nestjs/swagger';
 import { Album } from './entities/album.entity';
+import { FileFieldsInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import { extname } from 'path';
+import { PhotosService } from '@test-repo-na/api/resource/photo';
+import { CreatePhotoDto } from '@test-repo-na/api/resource/photo';
 
 @Controller('album')
 export class AlbumController {
-  constructor(private readonly albumService: AlbumService) {}
+  constructor(
+    private readonly albumService: AlbumService,
+    private photoService: PhotosService
+  ) {}
 
   @ApiOkResponse({
     description: 'Album record created',
     type: Album,
   })
   @Post()
-  create(@Body() createAlbumDto: CreateAlbumDto) {
-    return this.albumService.create(createAlbumDto);
+  @UseInterceptors(
+    FileFieldsInterceptor([{ name: 'files' }], {
+      storage: diskStorage({
+        destination: './uploads',
+        filename: (req, file, cb) => {
+          const randomName = Array(32)
+            .fill(null)
+            .map(() => Math.round(Math.random() * 16).toString(16))
+            .join('');
+          return cb(null, `${randomName}${extname(file.originalname)}`);
+        },
+      }),
+    })
+  )
+  async create(
+    @Body() createAlbumDto: CreateAlbumDto,
+    @UploadedFiles() files: { files: Array<Express.Multer.File> }
+  ) {
+    console.log(111111, createAlbumDto, files);
+    const album = await this.albumService.create(createAlbumDto);
+    const photos = files.files.map((file) => {
+      return {
+        url: `http://localhost:3000/uploads/${file.filename}`,
+        albumId: album.id,
+      } as CreatePhotoDto;
+    });
+    console.log(222222, album, photos);
+    return this.photoService.create(photos);
   }
 
   @ApiOkResponse({

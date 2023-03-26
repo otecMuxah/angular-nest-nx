@@ -2,6 +2,7 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import {
   provideRouter,
   withEnabledBlockingInitialNavigation,
+  withRouterConfig,
 } from '@angular/router';
 import { AppComponent } from './app/app.component';
 import { appRoutes } from './app/app.routes';
@@ -13,9 +14,15 @@ import { importProvidersFrom } from '@angular/core';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideRouter(appRoutes, withEnabledBlockingInitialNavigation()),
+    provideRouter(
+      appRoutes,
+      withEnabledBlockingInitialNavigation(),
+      withRouterConfig({
+        paramsInheritanceStrategy: 'always',
+      })
+    ),
     provideHttpClient(),
     { provide: ENVIRONMENT, useValue: environment },
-    importProvidersFrom(BrowserAnimationsModule)
-],
+    importProvidersFrom(BrowserAnimationsModule),
+  ],
 }).catch((err) => console.error(err));

@@ -2,13 +2,10 @@ import { Component, forwardRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   ControlValueAccessor,
-  FormBuilder,
-  FormGroup,
   FormsModule,
   NG_VALUE_ACCESSOR,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'test-repo-na-file-upload',
@@ -25,17 +22,16 @@ import { HttpClient } from '@angular/common/http';
   ],
 })
 export class FileUploadComponent implements ControlValueAccessor {
-  value!: File;
-  selectedFiles!: File[];
+  selectedFiles!: File[] | FileList | null;
   isDragging = false;
   previews: string[] = [];
   onTouched!: () => void;
-  onChange!: (files: File[]) => void;
+  onChange!: (files: File[] | FileList | null) => void;
 
-  onFileSelect(ev: any): void {
-    this.selectedFiles = ev?.target?.files?.length
-      ? ev?.target?.files
-      : ev.dataTransfer.files;
+  onFileSelect(ev: Event): void {
+    this.selectedFiles = (ev.target as HTMLInputElement).files?.length
+      ? (ev.target as HTMLInputElement).files
+      : (ev as DragEvent).dataTransfer?.files || [];
     this.onChange(this.selectedFiles);
 
     this.previews = [];
@@ -62,12 +58,14 @@ export class FileUploadComponent implements ControlValueAccessor {
           this.previews.push(e.target.result);
         };
 
-        reader.readAsDataURL(this.selectedFiles[i]);
+        this.selectedFiles &&
+          this.selectedFiles[i] &&
+          reader.readAsDataURL(this.selectedFiles[i]);
       }
     }
   }
 
-  registerOnChange(fn: (file: File[]) => void): void {
+  registerOnChange(fn: (file: File[] | FileList | null) => void): void {
     this.onChange = fn;
   }
 
@@ -75,23 +73,19 @@ export class FileUploadComponent implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  setDisabledState(isDisabled: boolean): void {
-    // Implement if necessary
-  }
-  onDragOver(event: any) {
+  onDragOver(event: Event) {
     event.preventDefault();
     event.stopPropagation();
     this.isDragging = true;
   }
 
-  onDragLeave(event: any) {
+  onDragLeave(event: Event) {
     event.preventDefault();
     event.stopPropagation();
     this.isDragging = false;
   }
 
-  onDrop(event: any) {
-    debugger;
+  onDrop(event: Event) {
     event.preventDefault();
     event.stopPropagation();
     this.isDragging = false;

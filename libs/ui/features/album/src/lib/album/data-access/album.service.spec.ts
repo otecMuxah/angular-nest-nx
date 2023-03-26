@@ -4,7 +4,7 @@ import { AlbumService } from './album.service';
 
 import { of } from 'rxjs';
 import { ApiBaseService } from '@test-repo-na/ui/shared/services';
-import { Photo } from '@test-repo-na/models';
+import { PhotoModel } from '@test-repo-na/models';
 
 describe('AlbumService', () => {
   let service: AlbumService;
@@ -28,7 +28,7 @@ describe('AlbumService', () => {
     const page = '1';
     const pageSize = '10';
     const expectedUrl = 'photos/album/1?page=1&pageSize=10';
-    const expectedData: Photo[] = [
+    const expectedData: PhotoModel[] = [
       {
         id: 1,
         albumId: 1,

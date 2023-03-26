@@ -7,9 +7,11 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatIconModule } from '@angular/material/icon';
 import { AlbumService } from '../../data-access/album.service';
-import { FileUploadComponent } from '../../../../../../../shared/components/src/lib/file-upload/file-upload.component';
+import { FileUploadComponent } from '@test-repo-na/ui/shared/components';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { catchError, throwError } from 'rxjs';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'test-repo-na-create-album',
@@ -24,6 +26,7 @@ import { catchError, throwError } from 'rxjs';
     MatIconModule,
     FileUploadComponent,
     MatSnackBarModule,
+    MatButtonModule,
   ],
   templateUrl: './create-album.component.html',
   styleUrls: ['./create-album.component.scss'],
@@ -31,9 +34,10 @@ import { catchError, throwError } from 'rxjs';
 export class CreateAlbumComponent {
   albumService = inject(AlbumService);
   snackbar = inject(MatSnackBar);
+  dialog = inject(MatDialogRef);
 
   form = new FormGroup({
-    name: new FormControl(''),
+    title: new FormControl<string>(''),
     photos: new FormControl<File[]>([]),
   });
 
@@ -49,17 +53,15 @@ export class CreateAlbumComponent {
         .createAlbum(
           this.form.value.photos || [],
           +number,
-          this.form.value.name || ''
+          this.form.value.title || ''
         )
         .pipe(
           catchError((err) => {
-            this.snackbar.open(err.message, 'close');
+            this.snackbar.open(err.error.message, 'close');
             return throwError(err);
           })
         )
-        .subscribe();
-    } else {
-      console.log('No match found');
+        .subscribe(() => this.dialog.close());
     }
   }
 }

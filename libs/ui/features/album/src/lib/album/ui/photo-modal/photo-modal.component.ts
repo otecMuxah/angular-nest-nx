@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Photo } from '@test-repo-na/models';
+import { PhotoModel } from '@test-repo-na/models';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -11,5 +11,5 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./photo-modal.component.scss'],
 })
 export class PhotoModalComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: Photo) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: PhotoModel) {}
 }

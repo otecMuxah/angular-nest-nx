@@ -1,6 +1,6 @@
 import { Test } from '@nestjs/testing';
 import { PhotosService } from './photos.service';
-import { Photo } from '@test-repo-na/models';
+import { PhotoModel } from '@test-repo-na/models';
 import { PrismaService } from '@test-repo-na/api/core/services/shared-services';
 
 describe('PhotosService', () => {
@@ -29,8 +29,8 @@ describe('PhotosService', () => {
   describe('photosByAlbumId', () => {
     it('should return photos for the specified album ID', async () => {
       const mockPhotos = [
-        { id: 1, title: 'Photo 1' } as Photo,
-        { id: 2, title: 'Photo 2' } as Photo,
+        { id: 1, title: 'Photo 1' } as PhotoModel,
+        { id: 2, title: 'Photo 2' } as PhotoModel,
       ];
       const prismaClientSpy = jest
         .spyOn(prismaService.photos, 'findMany')

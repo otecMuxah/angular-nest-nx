@@ -5,14 +5,9 @@
   (drop)="onDrop($event)"
 >
   <p>Drop files here</p>
-  <input
-    type="file"
-    (change)="onFileSelect($event)"
-    accept="image/*"
-    multiple
-  />
 </div>
-
+<input type="file" (change)="onFileSelect($event)" accept="image/*" multiple />
 <div>
+  <div>Preview:</div>
   <img *ngFor="let preview of previews" [src]="preview" class="preview" />
 </div>

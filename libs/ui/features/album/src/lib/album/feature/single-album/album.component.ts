@@ -2,7 +2,7 @@ import { Component, inject, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AlbumService } from '../../data-access/album.service';
 import { map, Observable } from 'rxjs';
-import { Photo } from '@test-repo-na/models';
+import { PhotoModel } from '@test-repo-na/models';
 import { ActivatedRoute } from '@angular/router';
 import { PhotoComponent } from '../../ui/photo/photo.component';
 import { MatCardModule } from '@angular/material/card';

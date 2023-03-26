@@ -1,6 +1,6 @@
 import { users } from '@prisma/client';
-import { Album } from './album.model';
+import { AlbumModel } from './album.model';
 
 export interface UserModel extends users {
-  albums?: Album[];
+  albums?: AlbumModel[];
 }

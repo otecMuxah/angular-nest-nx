@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { PhotosController } from './photos.controller';
 import { PhotosService } from './photos.service';
-import { Photo } from '@test-repo-na/models';
+import { PhotoModel } from '@test-repo-na/models';
 
 describe('PhotosController', () => {
   // let controller: PhotosController;
@@ -40,8 +40,8 @@ describe('PhotosController', () => {
   describe('getAlbumByAlbumId', () => {
     it('should return photos for the specified album', async () => {
       const mockPhotos = [
-        { id: 1, title: 'Photo 1' } as Photo,
-        { id: 2, title: 'Photo 2' } as Photo,
+        { id: 1, title: 'Photo 1' } as PhotoModel,
+        { id: 2, title: 'Photo 2' } as PhotoModel,
       ];
       const photosServiceSpy = jest
         .spyOn(photosService, 'photosByAlbumId')

@@ -1,11 +1,12 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
-import { Album } from '@test-repo-na/models';
+import { AlbumModel } from '@test-repo-na/models';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { CreateAlbumComponent } from '../create-album/create-album.component';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'test-repo-na-album-list',
@@ -22,10 +23,15 @@ import { CreateAlbumComponent } from '../create-album/create-album.component';
   styleUrls: ['./album-list.component.scss'],
 })
 export class AlbumListComponent {
-  @Input() albums: Album[] = [];
+  @Input() albums: AlbumModel[] = [];
+  @Output() reloadAlbum = new EventEmitter();
   constructor(private dialog: MatDialog) {}
 
   createAlbum() {
-    this.dialog.open(CreateAlbumComponent);
+    this.dialog
+      .open(CreateAlbumComponent)
+      .beforeClosed()
+      .pipe(take(1))
+      .subscribe(() => this.reloadAlbum.emit());
   }
 }

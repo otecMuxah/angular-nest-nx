@@ -7,7 +7,7 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { NgOptimizedImage } from '@angular/common';
-import { Photo } from '@test-repo-na/models';
+import { PhotoModel } from '@test-repo-na/models';
 
 describe('PhotoModalComponent', () => {
   let component: PhotoModalComponent;
@@ -19,7 +19,7 @@ describe('PhotoModalComponent', () => {
       providers: [
         {
           provide: MAT_DIALOG_DATA,
-          useValue: { url: 'xxx' } as Photo,
+          useValue: { url: 'xxx' } as PhotoModel,
         },
         { provide: MatDialogRef, useValue: {} },
       ],

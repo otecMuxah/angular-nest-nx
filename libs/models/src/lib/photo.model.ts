@@ -1,3 +1,3 @@
 import { photos } from '@prisma/client';
 
-export type Photo = photos;
+export type PhotoModel = photos;

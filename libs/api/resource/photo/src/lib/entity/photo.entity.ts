@@ -1,7 +1,7 @@
-import { photos } from '@prisma/client';
 import { ApiProperty } from '@nestjs/swagger';
+import { PhotoModel } from '@test-repo-na/models';
 
-export class Photo implements photos {
+export class Photo implements PhotoModel {
   @ApiProperty()
   albumId: number | null;
 

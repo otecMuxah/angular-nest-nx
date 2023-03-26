@@ -21,6 +21,7 @@
   <test-repo-na-album-list
     *ngIf="model?.albums"
     [albums]="model.albums || []"
+    (reloadAlbum)="reloadAlbum()"
   ></test-repo-na-album-list>
 
   <router-outlet></router-outlet>

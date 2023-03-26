@@ -1,16 +1,16 @@
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { BehaviorSubject, Observable, Subscription, take } from 'rxjs';
 import { AlbumService } from './album.service';
-import { Photo } from '@test-repo-na/models';
+import { PhotoModel } from '@test-repo-na/models';
 
-export class PhotosDataSource extends DataSource<Photo | undefined> {
+export class PhotosDataSource extends DataSource<PhotoModel | undefined> {
   private _pageSize = 10;
-  private _cachedData: Photo[] = [];
+  private _cachedData: PhotoModel[] = [];
   private _fetchedPages = new Set<number>();
   private _albumId = '';
-  private readonly _dataStream = new BehaviorSubject<(Photo | undefined)[]>(
-    this._cachedData
-  );
+  private readonly _dataStream = new BehaviorSubject<
+    (PhotoModel | undefined)[]
+  >(this._cachedData);
   private readonly _subscription = new Subscription();
 
   constructor(albumId: string, private albumService: AlbumService) {
@@ -21,7 +21,7 @@ export class PhotosDataSource extends DataSource<Photo | undefined> {
 
   connect(
     collectionViewer: CollectionViewer
-  ): Observable<(Photo | undefined)[]> {
+  ): Observable<(PhotoModel | undefined)[]> {
     this._subscription.add(
       collectionViewer.viewChange.subscribe((range) => {
         const startPage = this._getPageForIndex(range.start);

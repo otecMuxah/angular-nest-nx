@@ -12,7 +12,7 @@ import { UserModel } from '@test-repo-na/models';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { AlbumListComponent } from '@test-repo-na/ui/features/album';
-import { CreateAlbumComponent } from '../../../../../album/src/lib/album/ui/create-album/create-album.component';
+import { CreateAlbumComponent } from '@test-repo-na/ui/features/album';
 import { UsersService } from '../../data-access/users.service';
 
 @Component({

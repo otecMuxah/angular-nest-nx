@@ -43,14 +43,4 @@ export class AlbumService {
       orderBy,
     });
   }
-
-  update(id: number, updateAlbumDto: UpdateAlbumDto) {
-    // return this.prisma.albums.update({
-    //   data: updateAlbumDto,
-    // });
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} album`;
-  }
 }

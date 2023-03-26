@@ -4,19 +4,6 @@ import { PhotosService } from './photos.service';
 import { PhotoModel } from '@test-repo-na/models';
 
 describe('PhotosController', () => {
-  // let controller: PhotosController;
-  //
-  // beforeEach(async () => {
-  //   const module: TestingModule = await Test.createTestingModule({
-  //     controllers: [PhotosController],
-  //   }).compile();
-  //
-  //   controller = module.get<PhotosController>(PhotosController);
-  // });
-  //
-  // it('should be defined', () => {
-  //   expect(controller).toBeDefined();
-  // });
   let controller: PhotosController;
   let photosService: PhotosService;
 

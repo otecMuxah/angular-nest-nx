@@ -11,6 +11,8 @@
   </mat-card-content>
   <mat-divider></mat-divider>
   <mat-card-actions>
-    <button mat-button [routerLink]="[user.id]">MORE INFO</button>
+    <button mat-button [routerLink]="[user.id]" data-cy="more-info-button">
+      MORE INFO
+    </button>
   </mat-card-actions>
 </mat-card>

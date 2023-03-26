@@ -10,8 +10,6 @@ import {
   Query,
   UploadedFiles,
   UseInterceptors,
-  UsePipes,
-  ValidationPipe,
 } from '@nestjs/common';
 import { AlbumService } from './album.service';
 import { CreateAlbumDto } from './dto/create-album.dto';
@@ -21,8 +19,10 @@ import { Album } from './entities/album.entity';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
-import { PhotosService } from '@test-repo-na/api/resource/photo';
-import { CreatePhotoDto } from '@test-repo-na/api/resource/photo';
+import {
+  CreatePhotoDto,
+  PhotosService,
+} from '@test-repo-na/api/resource/photo';
 
 @Controller('album')
 export class AlbumController {

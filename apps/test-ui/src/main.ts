@@ -6,11 +6,16 @@ import {
 } from '@angular/router';
 import { AppComponent } from './app/app.component';
 import { appRoutes } from './app/app.routes';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { ENVIRONMENT } from '@test-repo-na/ui/shared/env';
 import { environment } from './environment/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { importProvidersFrom } from '@angular/core';
+import { ErrorHandler, importProvidersFrom } from '@angular/core';
+import {
+  ApiErrorHandlerInterceptor,
+  GlobalErrorHandler,
+} from '@test-repo-na/ui/shared/services';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -21,8 +26,13 @@ bootstrapApplication(AppComponent, {
         paramsInheritanceStrategy: 'always',
       })
     ),
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([ApiErrorHandlerInterceptor])),
     { provide: ENVIRONMENT, useValue: environment },
+    {
+      provide: ErrorHandler,
+      useClass: GlobalErrorHandler,
+    },
     importProvidersFrom(BrowserAnimationsModule),
+    importProvidersFrom(MatSnackBarModule),
   ],
 }).catch((err) => console.error(err));

@@ -13,5 +13,5 @@ visit http://localhost:4200
 - Angular Material
 - Performance tweaks (Lazy loading, OnPush change detection)
 - Pagination + Virtual Scroll
-- Jest tests
+- Jest tests (AlbumService, PhotosController, PhotosService)
 - Cypress test

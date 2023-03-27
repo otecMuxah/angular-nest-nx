@@ -50,7 +50,6 @@ export class PhotosDataSource extends DataSource<PhotoModel | undefined> {
 
     this.albumService
       .getAlbumPhotos(this._albumId, String(page), String(this._pageSize))
-      .pipe(take(1))
       .subscribe((data) => {
         if (page === 0) {
           this._cachedData = data;

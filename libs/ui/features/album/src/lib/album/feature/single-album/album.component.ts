@@ -3,6 +3,7 @@ import {
   ChangeDetectorRef,
   Component,
   inject,
+  OnDestroy,
   OnInit,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -17,6 +18,7 @@ import {
   CdkVirtualForOf,
   CdkVirtualScrollViewport,
 } from '@angular/cdk/scrolling';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'test-repo-na-album',
@@ -35,14 +37,15 @@ import {
   styleUrls: ['./album.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AlbumComponent implements OnInit {
-  albumService = inject(AlbumService);
-  route = inject(ActivatedRoute);
-  cdr = inject(ChangeDetectorRef);
+export class AlbumComponent implements OnInit, OnDestroy {
+  private readonly albumService = inject(AlbumService);
+  private readonly route = inject(ActivatedRoute);
+  private readonly cdr = inject(ChangeDetectorRef);
   ds!: PhotosDataSource | null;
+  private readonly destroy$ = new Subject();
 
   ngOnInit(): void {
-    this.route.params.pipe().subscribe((param) => {
+    this.route.params.pipe(takeUntil(this.destroy$)).subscribe((param) => {
       if (this.ds) {
         this.ds.disconnect();
         this.ds = null;
@@ -50,5 +53,10 @@ export class AlbumComponent implements OnInit {
       this.ds = new PhotosDataSource(param['albumId'], this.albumService);
       this.cdr.markForCheck();
     });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next({});
+    this.destroy$.complete();
   }
 }

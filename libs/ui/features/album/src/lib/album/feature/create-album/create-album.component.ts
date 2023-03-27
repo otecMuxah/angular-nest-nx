@@ -30,21 +30,20 @@ import { Router } from '@angular/router';
     MatButtonModule,
   ],
   templateUrl: './create-album.component.html',
-  styleUrls: ['./create-album.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateAlbumComponent {
-  albumService = inject(AlbumService);
-  snackbar = inject(MatSnackBar);
-  dialog = inject(MatDialogRef);
-  router = inject(Router);
+  private readonly albumService = inject(AlbumService);
+  private readonly snackbar = inject(MatSnackBar);
+  private readonly dialog = inject(MatDialogRef);
+  private readonly router = inject(Router);
 
   form = new FormGroup({
     title: new FormControl<string>(''),
     photos: new FormControl<File[]>([]),
   });
 
-  createAlbum() {
+  createAlbum(): void {
     // have issue accessing userId from activated route
     const url = this.router.url;
     const regex = /users\/(\d+)\/*/;

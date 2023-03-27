@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  inject,
   Input,
   Output,
 } from '@angular/core';
@@ -32,7 +33,7 @@ import { take } from 'rxjs';
 export class AlbumListComponent {
   @Input() albums: AlbumModel[] = [];
   @Output() reloadAlbum = new EventEmitter();
-  constructor(private dialog: MatDialog) {}
+  private readonly dialog = inject(MatDialog);
 
   createAlbum() {
     this.dialog

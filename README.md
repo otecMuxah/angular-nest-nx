@@ -8,6 +8,7 @@ visit http://localhost:4200
 - NestJs
 - NX mono repository
 - Docker
+- .env support for Angular
 - Prisma
 - Angular Material
 - Performance tweaks (Lazy loading, OnPush change detection)

@@ -13,4 +13,9 @@ export const appRoutes: Route[] = [
         (x) => x.uiFeaturesUsersRoutes
       ),
   },
+  {
+    path: '**',
+    pathMatch: 'full',
+    redirectTo: 'users',
+  },
 ];
